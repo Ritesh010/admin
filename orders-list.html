@@ -1,0 +1,435 @@
+<!DOCTYPE html>
+<html lang="en">
+
+
+<!-- Mirrored from techzaa.in/larkon/admin/orders-list.html by HTTrack Website Copier/3.x [XR&CO'2014], Sun, 08 Jun 2025 06:04:53 GMT -->
+
+<head>
+     <!-- Title Meta -->
+     <meta charset="utf-8" />
+     <title>Orders List</title>
+     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+     <meta name="description" content="" />
+     <meta name="author" content="Techzaa" />
+     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+
+     <!-- App favicon -->
+     <link rel="shortcut icon" href="assets/images/favicon.ico">
+
+     <!-- Vendor css (Require in all Page) -->
+     <link href="assets/css/vendor.min.css" rel="stylesheet" type="text/css" />
+
+     <!-- Icons css (Require in all Page) -->
+     <link href="assets/css/icons.min.css" rel="stylesheet" type="text/css" />
+
+     <!-- App css (Require in all Page) -->
+     <link href="assets/css/app.min.css" rel="stylesheet" type="text/css" />
+
+     <!-- Theme Config js (Require in all Page) -->
+     <script src="assets/js/config.js"></script>
+</head>
+
+<body>
+
+     <!-- START Wrapper -->
+     <div class="wrapper">
+
+          <!-- ========== Topbar Start ========== -->
+          <header class="topbar">
+               <div class="container-fluid">
+                    <div class="navbar-header">
+                         <div class="d-flex align-items-center">
+                              <!-- Menu Toggle Button -->
+                              <div class="topbar-item">
+                                   <button type="button" class="button-toggle-menu me-2">
+                                        <iconify-icon icon="solar:hamburger-menu-broken"
+                                             class="fs-24 align-middle"></iconify-icon>
+                                   </button>
+                              </div>
+
+                              <!-- Menu Toggle Button -->
+                              <div class="topbar-item">
+                                   <h4 class="fw-bold topbar-button pe-none text-uppercase mb-0">Welcome!</h4>
+                              </div>
+                         </div>
+
+                         <div class="d-flex align-items-center gap-1">
+
+                              <!-- Theme Color (Light/Dark) -->
+                              <div class="topbar-item">
+                                   <button type="button" class="topbar-button" id="light-dark-mode">
+                                        <iconify-icon icon="solar:moon-bold-duotone"
+                                             class="fs-24 align-middle"></iconify-icon>
+                                   </button>
+                              </div>
+
+                              <!-- User -->
+                              <div class="dropdown topbar-item">
+                                   <a type="button" class="topbar-button" id="page-header-user-dropdown"
+                                        data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                        <span class="d-flex align-items-center">
+                                             <img class="rounded-circle" width="32"
+                                                  src="assets/images/users/avatar-1.jpg" alt="avatar-3">
+                                        </span>
+                                   </a>
+                                   <div class="dropdown-menu dropdown-menu-end">
+                                        <!-- item-->
+                                        <a class="dropdown-item text-danger" href="auth-signin.html">
+                                             <i class="bx bx-log-out fs-18 align-middle me-1"></i><span
+                                                  class="align-middle">Logout</span>
+                                        </a>
+                                   </div>
+                              </div>
+
+                         </div>
+                    </div>
+               </div>
+          </header>
+
+          <!-- ========== Topbar End ========== -->
+
+          <!-- ========== App Menu Start ========== -->
+          <div class="main-nav">
+               <!-- Sidebar Logo -->
+               <div class="logo-box">
+                    <a href="index.html" class="logo-dark">
+                         <img src="assets/images/logo.png" class="logo-sm" alt="logo sm">
+                         <img src="assets/images/logo.png" class="logo-lg" alt="logo dark">
+                    </a>
+
+                    <a href="index.html" class="logo-light">
+                         <img src="assets/images/logo.png" class="logo-sm" alt="logo sm">
+                         <img src="assets/images/logo.png" class="logo-lg" alt="logo light">
+                    </a>
+               </div>
+
+               <!-- Menu Toggle Button (sm-hover) -->
+               <button type="button" class="button-sm-hover" aria-label="Show Full Sidebar">
+                    <iconify-icon icon="solar:double-alt-arrow-right-bold-duotone"
+                         class="button-sm-hover-icon"></iconify-icon>
+               </button>
+
+               <div class="scrollbar" data-simplebar>
+                    <ul class="navbar-nav" id="navbar-nav">
+
+                         <li class="menu-title">General</li>
+
+                         <li class="nav-item">
+                              <a class="nav-link" href="index.html">
+                                   <span class="nav-icon">
+                                        <iconify-icon icon="solar:widget-5-bold-duotone"></iconify-icon>
+                                   </span>
+                                   <span class="nav-text"> Dashboard </span>
+                              </a>
+                         </li>
+
+                         <li class="nav-item">
+                              <a class="nav-link menu-arrow" href="#sidebarProducts" data-bs-toggle="collapse"
+                                   role="button" aria-expanded="false" aria-controls="sidebarProducts">
+                                   <span class="nav-icon">
+                                        <iconify-icon icon="solar:t-shirt-bold-duotone"></iconify-icon>
+                                   </span>
+                                   <span class="nav-text"> Products </span>
+                              </a>
+                              <div class="collapse" id="sidebarProducts">
+                                   <ul class="nav sub-navbar-nav">
+                                        <li class="sub-nav-item">
+                                             <a class="sub-nav-link" href="product-list.html">List</a>
+                                        </li>
+                                        
+                                        <li class="sub-nav-item">
+                                             <a class="sub-nav-link" href="product-add.html">Create</a>
+                                        </li>
+                                   </ul>
+                              </div>
+                         </li>
+
+                         <li class="nav-item">
+                              <a class="nav-link menu-arrow" href="#sidebarOrders" data-bs-toggle="collapse"
+                                   role="button" aria-expanded="false" aria-controls="sidebarOrders">
+                                   <span class="nav-icon">
+                                        <iconify-icon icon="solar:bag-smile-bold-duotone"></iconify-icon>
+                                   </span>
+                                   <span class="nav-text"> Orders </span>
+                              </a>
+                              <div class="collapse" id="sidebarOrders">
+                                   <ul class="nav sub-navbar-nav">
+
+                                        <li class="sub-nav-item">
+                                             <a class="sub-nav-link" href="orders-list.html">List</a>
+                                        </li>
+                                   </ul>
+                              </div>
+                         </li>
+                    </ul>
+               </div>
+          </div>
+          <!-- ========== App Menu End ========== -->
+
+
+
+
+          <!-- ==================================================== -->
+          <!-- Start right Content here -->
+          <!-- ==================================================== -->
+          <div>
+
+               <div class="page-content">
+                    <!-- Start Container Fluid -->
+                    <div class="container-fluid">
+
+                         <!-- Start here.... -->
+                         <div class="row">
+                              <div class="col-md-6 col-xl-3">
+                                   <div class="card">
+                                        <div class="card-body">
+                                             <div class="d-flex align-items-center justify-content-between">
+                                                  <div>
+                                                       <h4 class="card-title mb-2">Total Orders</h4>
+                                                       <p class="text-muted fw-medium fs-22 mb-0"
+                                                            id="statistics.total_orders">
+                                                       </p>
+                                                  </div>
+                                                  <div>
+                                                       <div class="avatar-md bg-soft-primary rounded">
+                                                            <iconify-icon icon="solar:cart-5-bold-duotone"
+                                                                 class="avatar-title fs-32 text-primary"></iconify-icon>
+                                                       </div>
+                                                  </div>
+                                             </div>
+                                        </div>
+                                   </div>
+                              </div>
+                              <div class="col-md-6 col-xl-3">
+                                   <div class="card">
+                                        <div class="card-body">
+                                             <div class="d-flex align-items-center justify-content-between">
+                                                  <div>
+                                                       <h4 class="card-title mb-2">Pending Orders</h4>
+                                                       <p class="text-muted fw-medium fs-22 mb-0"
+                                                            id="statistics.pending_orders">
+                                                       </p>
+                                                  </div>
+                                                  <div>
+                                                       <div class="avatar-md bg-primary bg-opacity-10 rounded">
+                                                            <iconify-icon icon="solar:inbox-line-broken"
+                                                                 class="fs-32 text-primary avatar-title"></iconify-icon>
+                                                       </div>
+                                                  </div>
+                                             </div>
+                                        </div>
+                                   </div>
+                              </div>
+                              <div class="col-md-6 col-xl-3">
+                                   <div class="card">
+                                        <div class="card-body">
+                                             <div class="d-flex align-items-center justify-content-between">
+                                                  <div>
+                                                       <h4 class="card-title mb-2">Processing Orders</h4>
+                                                       <p class="text-muted fw-medium fs-22 mb-0"
+                                                            id="statistics.processing_orders"></p>
+                                                  </div>
+                                                  <div>
+                                                       <div class="avatar-md bg-primary bg-opacity-10 rounded">
+                                                            <iconify-icon icon="solar:clipboard-check-broken"
+                                                                 class="fs-32 text-primary avatar-title"></iconify-icon>
+                                                       </div>
+                                                  </div>
+                                             </div>
+                                        </div>
+                                   </div>
+                              </div>
+                              <div class="col-md-6 col-xl-3">
+                                   <div class="card">
+                                        <div class="card-body">
+                                             <div class="d-flex align-items-center justify-content-between">
+                                                  <div>
+                                                       <h4 class="card-title mb-2">Shipped Orders</h4>
+                                                       <p class="text-muted fw-medium fs-22 mb-0"
+                                                            id="statistics.shipped_orders"></p>
+                                                  </div>
+                                                  <div>
+                                                       <div class="avatar-md bg-primary bg-opacity-10 rounded">
+                                                            <iconify-icon icon="solar:box-broken"
+                                                                 class="fs-32 text-primary avatar-title"></iconify-icon>
+                                                       </div>
+                                                  </div>
+                                             </div>
+                                        </div>
+                                   </div>
+                              </div>
+                              <div class="col-md-6 col-xl-3">
+                                   <div class="card">
+                                        <div class="card-body">
+                                             <div class="d-flex align-items-center justify-content-between">
+                                                  <div>
+                                                       <h4 class="card-title mb-2">Delivered Orders</h4>
+                                                       <p class="text-muted fw-medium fs-22 mb-0"
+                                                            id="statistics.delivered_orders"></p>
+                                                  </div>
+                                                  <div>
+                                                       <div class="avatar-md bg-primary bg-opacity-10 rounded">
+                                                            <iconify-icon icon="solar:cart-cross-broken"
+                                                                 class="fs-32 text-primary avatar-title"></iconify-icon>
+                                                       </div>
+                                                  </div>
+                                             </div>
+                                        </div>
+                                   </div>
+                              </div>
+                              <div class="col-md-6 col-xl-3">
+                                   <div class="card">
+                                        <div class="card-body">
+                                             <div class="d-flex align-items-center justify-content-between">
+                                                  <div>
+                                                       <h4 class="card-title mb-2">Cancelled Orders</h4>
+                                                       <p class="text-muted fw-medium fs-22 mb-0"
+                                                            id="statistics.cancelled_orders"></p>
+                                                  </div>
+                                                  <div>
+                                                       <div class="avatar-md bg-primary bg-opacity-10 rounded">
+                                                            <iconify-icon icon="solar:clipboard-check-broken"
+                                                                 class="fs-32 text-primary avatar-title"></iconify-icon>
+                                                       </div>
+                                                  </div>
+                                             </div>
+                                        </div>
+                                   </div>
+                              </div>
+                              <div class="col-md-6 col-xl-3">
+                                   <div class="card">
+                                        <div class="card-body">
+                                             <div class="d-flex align-items-center justify-content-between">
+                                                  <div>
+                                                       <h4 class="card-title mb-2">Returned Orders</h4>
+                                                       <p class="text-muted fw-medium fs-22 mb-0"
+                                                            id="statistics.returned_orders"></p>
+                                                  </div>
+                                                  <div>
+                                                       <div class="avatar-md bg-primary bg-opacity-10 rounded">
+                                                            <iconify-icon icon="solar:clock-circle-broken"
+                                                                 class="fs-32 text-primary avatar-title"></iconify-icon>
+                                                       </div>
+                                                  </div>
+                                             </div>
+                                        </div>
+                                   </div>
+                              </div>
+                              <div class="col-md-6 col-xl-3">
+                                   <div class="card">
+                                        <div class="card-body">
+                                             <div class="d-flex align-items-center justify-content-between">
+                                                  <div>
+                                                       <h4 class="card-title mb-2">Total Revenue</h4>
+                                                       <p class="text-muted fw-medium fs-22 mb-0"
+                                                            id="statistics.total_revenue"></p>
+                                                  </div>
+                                                  <div>
+                                                       <div class="avatar-md bg-soft-primary rounded">
+                                                            <iconify-icon icon="solar:cart-5-bold-duotone"
+                                                                 class="avatar-title fs-32 text-primary"></iconify-icon>
+                                                       </div>
+                                                  </div>
+                                             </div>
+                                        </div>
+                                   </div>
+                              </div>
+                         </div>
+
+                    </div>
+                    <!-- End Container Fluid -->
+                    <!-- Start Container Fluid -->
+                    <div class="container-xxl">
+
+                         <div class="row">
+                              <div class="col-xl-12">
+                                   <div class="card">
+                                        <div class="card-body p-0">
+                                             <div class="table-responsive table-centered">
+                                                  <table class="table mb-0 orders-list-table">
+                                                       <thead class="bg-light bg-opacity-50">
+                                                            <tr>
+                                                                 <th class="ps-3">
+                                                                      Order ID.
+                                                                 </th>
+                                                                 <th>
+                                                                      Date & Time
+                                                                 </th>
+                                                                 <th>
+                                                                      Items
+                                                                 </th>
+                                                                 <th>
+                                                                      Customer Name
+                                                                 </th>
+                                                                 <th>
+                                                                      Email ID
+                                                                 </th>
+                                                                 <th>
+                                                                      Phone No.
+                                                                 </th>
+                                                                 <th>
+                                                                      Shipping Address
+                                                                 </th>
+                                                                 <th>
+                                                                      Payment Type
+                                                                 </th>
+                                                                 <th>
+                                                                      Invoice
+                                                                 </th>
+                                                                 <th>
+                                                                      Status
+                                                                 </th>
+                                                            </tr>
+                                                       </thead>
+                                                       <!-- end thead-->
+                                                       <tbody id="all-orders-body">
+                                                       </tbody>
+                                                       <!-- end tbody -->
+                                                  </table>
+                                                  <!-- end table -->
+                                             </div>
+                                             <!-- end table-responsive -->
+                                        </div>
+                                   </div>
+                              </div>
+
+                         </div>
+
+                    </div>
+                    <!-- End Container Fluid -->
+
+                    <!-- ========== Footer Start ========== -->
+                    <footer class="footer">
+                         <div class="container-fluid">
+                              <div class="row">
+                                   <div class="col-12 text-center">
+                                        <script>document.write(new Date().getFullYear())</script> &copy;
+                                        <a href="#" class="fw-bold footer-text" target="_blank">Karan Exotic Birds</a>
+                                   </div>
+                              </div>
+                         </div>
+                    </footer>
+                    <!-- ========== Footer End ========== -->
+
+               </div>
+               <!-- ==================================================== -->
+               <!-- End Page Content -->
+               <!-- ==================================================== -->
+
+
+          </div>
+
+     </div>
+     <!-- END Wrapper -->
+
+     <!-- Vendor Javascript (Require in all Page) -->
+     <script src="assets/js/vendor.js"></script>
+
+     <!-- App Javascript (Require in all Page) -->
+     <script src="assets/js/app.js"></script>
+     <script src="assets/js/admin-connect.js"></script>
+</body>
+
+
+
+</html>

@@ -1,0 +1,354 @@
+<!DOCTYPE html>
+<html lang="en">
+
+
+<!-- Mirrored from techzaa.in/larkon/admin/product-add.html by HTTrack Website Copier/3.x [XR&CO'2014], Sun, 08 Jun 2025 06:04:53 GMT -->
+<head>
+     <!-- Title Meta -->
+     <meta charset="utf-8" />
+     <title>Product Edit</title>
+     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+     <meta name="description" content="" />
+     <meta name="author" content="Techzaa" />
+     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+
+     <!-- App favicon -->
+     <link rel="shortcut icon" href="assets/images/favicon.ico">
+
+     <!-- Vendor css (Require in all Page) -->
+     <link href="assets/css/vendor.min.css" rel="stylesheet" type="text/css" />
+
+     <!-- Icons css (Require in all Page) -->
+     <link href="assets/css/icons.min.css" rel="stylesheet" type="text/css" />
+
+     <!-- App css (Require in all Page) -->
+     <link href="assets/css/app.min.css" rel="stylesheet" type="text/css" />
+
+     <!-- Theme Config js (Require in all Page) -->
+     <script src="assets/js/config.js"></script>
+</head>
+
+<body>
+
+     <!-- START Wrapper -->
+     <div class="wrapper">
+
+          <!-- ========== Topbar Start ========== -->
+          <header class="topbar">
+               <div class="container-fluid">
+                    <div class="navbar-header">
+                         <div class="d-flex align-items-center">
+                              <!-- Menu Toggle Button -->
+                              <div class="topbar-item">
+                                   <button type="button" class="button-toggle-menu me-2">
+                                        <iconify-icon icon="solar:hamburger-menu-broken" class="fs-24 align-middle"></iconify-icon>
+                                   </button>
+                              </div>
+
+                              <!-- Menu Toggle Button -->
+                              <div class="topbar-item">
+                                   <h4 class="fw-bold topbar-button pe-none text-uppercase mb-0">Welcome!</h4>
+                              </div>
+                         </div>
+
+                         <div class="d-flex align-items-center gap-1">
+
+                              <!-- Theme Color (Light/Dark) -->
+                              <div class="topbar-item">
+                                   <button type="button" class="topbar-button" id="light-dark-mode">
+                                        <iconify-icon icon="solar:moon-bold-duotone" class="fs-24 align-middle"></iconify-icon>
+                                   </button>
+                              </div>
+
+                              <!-- User -->
+                              <div class="dropdown topbar-item">
+                                   <a type="button" class="topbar-button" id="page-header-user-dropdown"
+                                        data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                        <span class="d-flex align-items-center">
+                                             <img class="rounded-circle" width="32"
+                                                  src="assets/images/users/avatar-1.jpg" alt="avatar-3">
+                                        </span>
+                                   </a>
+                                   <div class="dropdown-menu dropdown-menu-end">
+                                        <!-- item-->
+                                        <a class="dropdown-item text-danger" href="auth-signin.html">
+                                             <i class="bx bx-log-out fs-18 align-middle me-1"></i><span
+                                                  class="align-middle">Logout</span>
+                                        </a>
+                                   </div>
+                              </div>
+
+                         </div>
+                    </div>
+               </div>
+          </header>
+
+          <!-- ========== Topbar End ========== -->
+
+          <!-- ========== App Menu Start ========== -->
+          <div class="main-nav">
+               <!-- Sidebar Logo -->
+               <div class="logo-box">
+                    <a href="index.html" class="logo-dark">
+                         <img src="assets/images/logo.png" class="logo-sm" alt="logo sm">
+                         <img src="assets/images/logo.png" class="logo-lg" alt="logo dark">
+                    </a>
+
+                    <a href="index.html" class="logo-light">
+                         <img src="assets/images/logo.png" class="logo-sm" alt="logo sm">
+                         <img src="assets/images/logo.png" class="logo-lg" alt="logo light">
+                    </a>
+               </div>
+
+               <!-- Menu Toggle Button (sm-hover) -->
+               <button type="button" class="button-sm-hover" aria-label="Show Full Sidebar">
+                    <iconify-icon icon="solar:double-alt-arrow-right-bold-duotone" class="button-sm-hover-icon"></iconify-icon>
+               </button>
+
+               <div class="scrollbar" data-simplebar>
+                    <ul class="navbar-nav" id="navbar-nav">
+
+                         <li class="menu-title">General</li>
+
+                         <li class="nav-item">
+                              <a class="nav-link" href="index.html">
+                                   <span class="nav-icon">
+                                        <iconify-icon icon="solar:widget-5-bold-duotone"></iconify-icon>
+                                   </span>
+                                   <span class="nav-text"> Dashboard </span>
+                              </a>
+                         </li>
+
+                         <li class="nav-item">
+                              <a class="nav-link menu-arrow" href="#sidebarProducts" data-bs-toggle="collapse" role="button" aria-expanded="false" aria-controls="sidebarProducts">
+                                   <span class="nav-icon">
+                                        <iconify-icon icon="solar:t-shirt-bold-duotone"></iconify-icon>
+                                   </span>
+                                   <span class="nav-text"> Products </span>
+                              </a>
+                              <div class="collapse" id="sidebarProducts">
+                                   <ul class="nav sub-navbar-nav">
+                                        <li class="sub-nav-item">
+                                             <a class="sub-nav-link" href="product-list.html">List</a>
+                                        </li>
+                                        
+                                        <li class="sub-nav-item">
+                                             <a class="sub-nav-link" href="product-add.html">Create</a>
+                                        </li>
+                                   </ul>
+                              </div>
+                         </li>
+
+                         <li class="nav-item">
+                              <a class="nav-link menu-arrow" href="#sidebarOrders" data-bs-toggle="collapse" role="button" aria-expanded="false" aria-controls="sidebarOrders">
+                                   <span class="nav-icon">
+                                        <iconify-icon icon="solar:bag-smile-bold-duotone"></iconify-icon>
+                                   </span>
+                                   <span class="nav-text"> Orders </span>
+                              </a>
+                              <div class="collapse" id="sidebarOrders">
+                                   <ul class="nav sub-navbar-nav">
+
+                                        <li class="sub-nav-item">
+                                             <a class="sub-nav-link" href="orders-list.html">List</a>
+                                        </li>                                        
+                                   </ul>
+                              </div>
+                         </li>                         
+                    </ul>
+               </div>
+          </div>
+          <!-- ========== App Menu End ========== -->
+
+          <!-- ==================================================== -->
+          <!-- Start right Content here -->
+          <!-- ==================================================== -->
+          <div class="page-content">
+
+               <!-- Start Container Fluid -->
+               <div class="container-xxl">
+
+                    <div class="row">
+                         <div class="col-md-12">
+                              <div class="card d-none" id="product-images">
+                                   <div class="card-header">
+                                        <h4 class="card-title">Add Product Photos<span class="d-none" id="product-id"></span></h4>
+                                   </div>
+                                   <div class="card-body">
+                                        <!-- File Upload -->
+                                        <form  class="dropzone"
+                                             id="myAwesomeDropzone" data-plugin="dropzone"
+                                             data-previews-container="#file-previews"
+                                             data-upload-preview-template="#uploadPreviewTemplate">
+                                             <div class="fallback">
+                                                  <input name="file" type="file" id="file-input" multiple />
+                                             </div>
+                                             <div class="dz-message needsclick">
+                                                  <i class="bx bx-cloud-upload fs-48 text-primary"></i>
+                                                  <h3 class="mt-4">Drop your images here, or <span
+                                                            class="text-primary">click to browse</span></h3>
+                                             </div>
+                                        </form>
+                                        <div id="image-previews" class="mt-4"></div>
+                                   </div>
+                              </div>
+                              <div class="card" id="product-info">
+                                   <div class="card-body product-add-heading">
+                                        <div class="d-flex align-items-center justify-content-between">
+                                             <h4 class="card-title">
+                                                  Product Information
+                                             </h4>
+                                             <div class="attribute-button">
+                                                  <button type="button" class="btn btn-primary btn-sm" id="add-attribute">+ Add Attribute</button>                                                                      
+                                             </div>
+                                        </div>
+                                   </div>
+                                   <div class="card-body">
+                                        <div class="row">
+                                             <div class="col-lg-6">
+                                                  <form>
+                                                       <div class="mb-3">
+                                                            <label for="product-name" class="form-label">Product
+                                                                 Name</label>
+                                                            <input type="text" id="product-name" class="form-control"
+                                                                 placeholder="Items Name" value="">
+                                                       </div>
+                                                  </form>
+                                             </div>
+                                             <div class="col-lg-6" id="attributesDiv">
+                                                  <label for="product-attributes" class="form-label">Product
+                                                       Attributes</label>
+
+                                                  
+                                                
+                                             </div>
+                                        </div>
+                                        <div class="row">
+                                             <div class="col-lg-4">
+                                                  <form>
+                                                       <div class="mb-3">
+                                                            <label for="product-stock" class="form-label">Stock</label>
+                                                            <input type="number" id="product-stock" class="form-control"
+                                                                 placeholder="Quantity" value="465">
+                                                       </div>
+                                                  </form>
+                                             </div>
+                                                <div class="col-lg-4">
+                                                  <form>
+                                                       <div class="mb-3">
+                                                            <label for="product-low-stock" class="form-label">Minimum Stock</label>
+                                                            <input type="number" id="product-low-stock" class="form-control"
+                                                                 placeholder="Quantity" value="465">
+                                                       </div>
+                                                  </form>
+                                             </div>
+                                             <div class="col-lg-4">
+                                                  <form>
+                                                       <div class="mb-3">
+                                                            <label for="product-brand" class="form-label">Dimensions <sub>L,W,H in cm</sub></label>
+                                                            <input type="numbers" id="product-dimensions" class="form-control"
+                                                                 placeholder="Dimensions" value="">
+                                                       </div>
+                                                  </form>
+                                             </div>
+                                             <div class="col-lg-4">
+                                                  <form>
+                                                       <div class="mb-3">
+                                                            <label for="product-weight"
+                                                                 class="form-label">Weight</label>
+                                                            <input type="text" id="product-weight" class="form-control"
+                                                                 placeholder="In gram" value="300">
+                                                       </div>
+                                                  </form>
+                                             </div>
+                                        </div>
+                                        <div class="row">
+                                             <div class="col-lg-12">
+                                                  <div class="mb-3">
+                                                       <label for="description" class="form-label">Description</label>
+                                                       <textarea class="form-control bg-light-subtle" id="description"
+                                                            rows="7"
+                                                            placeholder="Short description about the product">Top in sweatshirt fabric made from a cotton blend with a soft brushed inside. Relaxed fit with dropped shoulders, long sleeves and ribbing around the neckline, cuffs and hem. Small metal text applique.</textarea>
+                                                  </div>
+                                             </div>
+                                        </div>
+                                   </div>
+                              </div>
+
+                              <div class="card" id="product-costs">
+                                   <div class="card-header">
+                                        <h4 class="card-title">Pricing Details</h4>
+                                   </div>
+                                   <div class="card-body">
+                                        <div class="row">
+                                             <div class="col-lg-6">
+                                                  <form>
+                                                       <label for="product-price" class="form-label">Price</label>
+                                                       <div class="input-group mb-3">
+                                                            <span class="input-group-text ruppees">Rs</span>
+                                                            <input type="number" id="product-price" class="form-control"
+                                                                 placeholder="000" value="100">
+                                                       </div>
+                                                  </form>
+                                             </div>
+                                             <div class="col-lg-6">
+                                                  <form>
+                                                       <label for="product-MRP" class="form-label">MRP</label>
+                                                       <div class="input-group mb-3">
+                                                            <span class="input-group-text fs-20"><i
+                                                                      class='bx bxs-discount'></i></span>
+                                                            <input type="number" id="product-MRP"
+                                                                 class="form-control" placeholder="000" value="80">
+                                                       </div>
+                                                  </form>
+                                             </div>
+                                        </div>
+                                   </div>
+                              </div>
+                              <div class="p-3 bg-light mb-3 rounded">
+                                   <div class="row justify-content-end g-2">
+                                        <div class="col-lg-2">
+                                             <a href="#!" class="btn btn-outline-secondary w-100" id="skipDetails" onclick="skipDetails(event)">Skip Details</a>
+                                        </div>
+                                        <div class="col-lg-2">
+                                             <a href="#!" class="btn btn-primary w-100" onclick="editProductandImages(event)" id="editProductandImages">Edit Details</a>
+                                        </div>
+                                   </div>
+                              </div>
+                         </div>
+                    </div>
+
+               </div>
+               <!-- End Container Fluid -->
+
+               <!-- ========== Footer Start ========== -->
+               <footer class="footer">
+                    <div class="container-fluid">
+                         <div class="row">
+                              <div class="col-12 text-center">
+                                   <script>document.write(new Date().getFullYear())</script> &copy;
+                                   <a href="#" class="fw-bold footer-text" target="_blank">Karan Exotic Birds</a>
+                              </div>
+                         </div>
+                    </div>
+               </footer>
+               <!-- ========== Footer End ========== -->
+
+          </div>
+          <!-- ==================================================== -->
+          <!-- End Page Content -->
+          <!-- ==================================================== -->
+
+
+     </div>
+     <!-- END Wrapper -->
+
+     <!-- Vendor Javascript (Require in all Page) -->
+     <script src="assets/js/vendor.js"></script>
+
+     <!-- App Javascript (Require in all Page) -->
+     <script src="assets/js/app.js"></script>
+     <script src="assets/js/admin-connect.js"></script>
+</body>
+
+</html>
