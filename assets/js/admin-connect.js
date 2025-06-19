@@ -49,7 +49,7 @@ async function adminLogin(event) {
     try {
         console.log("Attempting admin login...");
 
-        const response = await fetch('http://68.183.247.116:3000/api/admin/login', {
+        const response = await fetch('https://api.thebirdcart.com/api/admin/login', {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json'
@@ -96,7 +96,7 @@ async function changePassword(event) {
   const newPassword = document.getElementById('newPassword').value;
   const confirmPassword = document.getElementById('reNewPassword').value;
 
-  const res = await fetch('http://68.183.247.116:3000/api/admin/change-password', {
+  const res = await fetch('https://api.thebirdcart.com/api/admin/change-password', {
     method: 'POST',
     headers: {
       'Content-Type': 'application/json',
@@ -121,7 +121,7 @@ async function changePassword(event) {
 
 async function getDashboard(adminToken) {
     try {
-        const response = await fetch('http://68.183.247.116:3000/api/admin/dashboard/overview', {
+        const response = await fetch('https://api.thebirdcart.com/api/admin/dashboard/overview', {
             headers: {
                 'Authorization': `Bearer ${adminToken}`
             }
@@ -244,7 +244,7 @@ function createOrderRow(orderData) {
 
 async function getOrders(adminToken) {
     try {
-        const response = await fetch('http://68.183.247.116:3000/api/orders/admin/all', {
+        const response = await fetch('https://api.thebirdcart.com/api/orders/admin/all', {
             headers: {
                 'Authorization': `Bearer ${adminToken}`
             }
@@ -417,7 +417,7 @@ async function onStatusChange(orderId, newStatus) {
     try {
         const adminToken = localStorage.getItem('adminToken');
 
-        const response = await fetch(`http://68.183.247.116:3000/api/orders/${orderId}/status`, {
+        const response = await fetch(`https://api.thebirdcart.com/api/orders/${orderId}/status`, {
             method: 'PATCH',
             headers: {
                 'Content-Type': 'application/json',
@@ -503,7 +503,7 @@ function createDetailRowHTML(orderData) {
 
 async function getAnalytics(adminToken) {
     try {
-        const response = await fetch('http://68.183.247.116:3000/api/orders/admin/analytics', {
+        const response = await fetch('https://api.thebirdcart.com/api/orders/admin/analytics', {
             headers: {
                 'Authorization': `Bearer ${adminToken}`
             }
@@ -527,7 +527,7 @@ async function getAnalytics(adminToken) {
 
 async function getProducts(adminToken) {
     try {
-        const response = await fetch('http://68.183.247.116:3000/api/products/admin/all?include_inactive=true', {
+        const response = await fetch('https://api.thebirdcart.com/api/products/admin/all?include_inactive=true', {
             headers: {
                 'Authorization': `Bearer ${adminToken}`
             }
@@ -764,7 +764,7 @@ async function deleteProduct(id) {
     try {
         const adminToken = localStorage.getItem('adminToken');
 
-        const response = await fetch(`http://68.183.247.116:3000/api/products/${id}`, {
+        const response = await fetch(`https://api.thebirdcart.com/api/products/${id}`, {
             method: 'DELETE',
             headers: {
                 'Content-Type': 'application/json',
@@ -790,7 +790,7 @@ async function onActiveChange(productId) {
     try {
         const adminToken = localStorage.getItem('adminToken');
 
-        const response = await fetch(`http://68.183.247.116:3000/api/products/${productId}/flip-status`, {
+        const response = await fetch(`https://api.thebirdcart.com/api/products/${productId}/flip-status`, {
             method: 'PATCH',
             headers: {
                 'Content-Type': 'application/json',
@@ -825,7 +825,7 @@ async function createProduct(event) {
 
         const adminToken = localStorage.getItem('adminToken');
 
-        const response = await fetch('http://68.183.247.116:3000/api/products', {
+        const response = await fetch('https://api.thebirdcart.com/api/products', {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',
@@ -1176,7 +1176,7 @@ async function uploadImagesToServer(productId, images) {
     try {
         const adminToken = localStorage.getItem('adminToken');
 
-        const response = await fetch(`http://68.183.247.116:3000/api/products/${productId}/images`, {
+        const response = await fetch(`https://api.thebirdcart.com/api/products/${productId}/images`, {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',
@@ -1219,7 +1219,7 @@ async function getProduct() {
 
         console.log('Loading product:', productId);
 
-        const response = await fetch(`http://68.183.247.116:3000/api/products/${productId}`);
+        const response = await fetch(`https://api.thebirdcart.com/api/products/${productId}`);
 
         if (!response.ok) {
             throw new Error('Failed to fetch product');
@@ -1419,7 +1419,7 @@ async function editProduct() {
 
         const adminToken = localStorage.getItem('adminToken');
 
-        const response = await fetch(`http://68.183.247.116:3000/api/products/${productId}`, {
+        const response = await fetch(`https://api.thebirdcart.com/api/products/${productId}`, {
             method: 'PUT',
             headers: {
                 'Content-Type': 'application/json',
@@ -1453,7 +1453,7 @@ async function editImages() {
         const adminToken = localStorage.getItem('adminToken');
 
         // Delete existing images first
-        const deleteResponse = await fetch(`http://68.183.247.116:3000/api/products/${productId}/images`, {
+        const deleteResponse = await fetch(`https://api.thebirdcart.com/api/products/${productId}/images`, {
             method: 'DELETE',
             headers: {
                 'Content-Type': 'application/json',
