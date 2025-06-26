@@ -232,7 +232,7 @@ function createOrderRow(orderData) {
     // Append all cells to row
     [orderNumberCell, orderDateCell, totalAmtCell, customerNameCell,
         customerEmailCell, customerPhoneCell, customerAddressCell,
-        paymentMethodCell, actionCell, statusCell].forEach(cell => {
+        paymentMethodCell, statusCell].forEach(cell => {
             row.appendChild(cell);
         });
 
