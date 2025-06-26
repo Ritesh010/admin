@@ -265,7 +265,6 @@ async function renderOrders() {
         const [ordersData, analyticsData] = await Promise.all([
             getOrders(adminToken),
             getAnalytics(adminToken),
-            getOrder(adminToken)
         ]);
 
         console.log("Analytics data:", analyticsData);
@@ -369,9 +368,9 @@ function createPaymentMethodCell(orderData) {
     return cell;
 }
 
-async function getOrder(adminToken) {
+async function getOrder(adminToken, orderId) {
     try {
-        const response = await fetch('https://api.thebirdcart.com/api/orders/1', {
+        const response = await fetch('https://api.thebirdcart.com/api/orders/' + orderId, {
             headers: {
                 'Authorization': `Bearer ${adminToken}`
             }
@@ -389,6 +388,143 @@ async function getOrder(adminToken) {
     }
 }
 
+function renderInvoice(data) {
+    const container = document.createElement('div');
+    container.style.fontFamily = 'Arial, sans-serif';
+    container.style.maxWidth = '800px';
+    container.style.margin = 'auto';
+    container.style.border = '1px solid #ccc';
+    container.style.padding = '20px';
+
+    // Helper function to add label and value
+    function addTextRow(label, value) {
+        const p = document.createElement('p');
+        const strong = document.createElement('strong');
+        strong.textContent = label + ': ';
+        p.appendChild(strong);
+        p.appendChild(document.createTextNode(value));
+        container.appendChild(p);
+    }
+
+    // Title
+    const title = document.createElement('h2');
+    title.textContent = 'Invoice';
+    container.appendChild(title);
+
+    addTextRow('Order Number', data.order_number);
+    addTextRow('Status', data.status);
+    addTextRow('Payment Method', data.payment_method);
+    addTextRow('Payment Status', data.payment_status);
+
+    container.appendChild(document.createElement('hr'));
+
+    // Address sections
+    const makeSectionTitle = (text) => {
+        const h3 = document.createElement('h3');
+        h3.textContent = text;
+        container.appendChild(h3);
+    };
+
+    makeSectionTitle('Shipping Address');
+    const shipping = document.createElement('p');
+    shipping.textContent = data.shipping_address;
+    container.appendChild(shipping);
+
+    makeSectionTitle('Billing Address');
+    const billing = document.createElement('p');
+    billing.textContent = data.billing_address;
+    container.appendChild(billing);
+
+    container.appendChild(document.createElement('hr'));
+
+    // Items table
+    makeSectionTitle('Items');
+    const table = document.createElement('table');
+    table.style.width = '100%';
+    table.style.borderCollapse = 'collapse';
+    table.border = '1';
+
+    const thead = document.createElement('thead');
+    const headerRow = document.createElement('tr');
+    ['Product', 'SKU', 'Quantity', 'Unit Price', 'Total Price'].forEach(text => {
+        const th = document.createElement('th');
+        th.textContent = text;
+        headerRow.appendChild(th);
+    });
+    thead.appendChild(headerRow);
+    table.appendChild(thead);
+
+    const tbody = document.createElement('tbody');
+    let itemTotal = 0;
+
+    data.items.forEach(item => {
+        const tr = document.createElement('tr');
+
+        const tdName = document.createElement('td');
+        tdName.textContent = item.product_name;
+        tr.appendChild(tdName);
+
+        const tdSku = document.createElement('td');
+        tdSku.textContent = item.sku;
+        tr.appendChild(tdSku);
+
+        const tdQty = document.createElement('td');
+        tdQty.textContent = item.quantity;
+        tr.appendChild(tdQty);
+
+        const tdUnit = document.createElement('td');
+        tdUnit.textContent = item.unit_price;
+        tr.appendChild(tdUnit);
+
+        const tdTotal = document.createElement('td');
+        tdTotal.textContent = item.total_price;
+        tr.appendChild(tdTotal);
+
+        itemTotal += parseFloat(item.total_price);
+
+        tbody.appendChild(tr);
+    });
+
+    table.appendChild(tbody);
+    container.appendChild(table);
+
+    container.appendChild(document.createElement('hr'));
+
+    // Final calculations
+    const totalAmount = parseFloat(data.total_amount);
+    const shippingAmount = totalAmount - itemTotal;
+
+    addTextRow('Item Subtotal', '₹' + itemTotal.toFixed(2));
+    addTextRow('Shipping Amount', '₹' + shippingAmount.toFixed(2));
+    addTextRow('Total Amount', '₹' + totalAmount.toFixed(2));
+
+    // Created at
+    const created = document.createElement('p');
+    const createdAt = new Date(data.created_at);
+    created.textContent = 'Created At: ' + createdAt.toLocaleString();
+    container.appendChild(created);
+
+    // Print Button
+    const printBtn = document.createElement('button');
+    printBtn.textContent = 'Print Invoice';
+    printBtn.style.marginTop = '20px';
+    printBtn.addEventListener('click', () => {
+        const printWindow = window.open('', '_blank');
+        printWindow.document.write('<html><head><title>Invoice</title></head><body>');
+        printWindow.document.body.appendChild(container.cloneNode(true));
+        printWindow.document.write('</body></html>');
+        printWindow.document.close();
+        printWindow.focus();
+        printWindow.print();
+        printWindow.close();
+    });
+
+    container.appendChild(printBtn);
+
+    document.body.appendChild(container);
+}
+
+
 function createActionCell(orderData) {
     const cell = document.createElement('td');
     const button = document.createElement('button');
@@ -397,12 +533,14 @@ function createActionCell(orderData) {
     button.type = 'button';
     button.classList.add('btn', 'btn-info', 'btn-sm');
     button.textContent = 'Generate';
-    button.addEventListener('onclick', function () {
+    button.addEventListener('click', function () {
         const orderId = this.dataset.orderId;
-        const newStatus = this.value;
         const adminToken = sessionStorage.getItem('adminToken');
-        getOrder(adminToken)
+        getOrder(adminToken, orderId).then(orderData => {
+            renderInvoice(orderData);
+        });
     });
+
     cell.appendChild(button);
 
     return cell;
