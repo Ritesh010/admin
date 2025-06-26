@@ -537,8 +537,6 @@ function renderInvoice(data) {
     document.body.appendChild(container);
 }
 
-
-
 function createActionCell(orderData) {
     const cell = document.createElement('td');
     const button = document.createElement('button');
