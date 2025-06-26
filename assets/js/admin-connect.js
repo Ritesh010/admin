@@ -3,7 +3,7 @@
 // ============================================================================
 
 // Initialize application based on authentication status and page
-if ("adminToken" in localStorage) {
+if ("adminToken" in sessionStorage) {
     initializeAuthenticatedApp();
 } else {
     handleUnauthenticatedUser();
@@ -26,7 +26,7 @@ function initializeAuthenticatedApp() {
 function handleUnauthenticatedUser() {
     if (!document.title.includes('Signin')) {
         alert("Session expired. Please log in again.");
-        localStorage.clear();
+        sessionStorage.clear();
         window.location.replace("auth-signin.html");
     }
 }
@@ -70,10 +70,10 @@ async function adminLogin(event) {
 
         if (result.message === 'Admin login successful') {
             // Store authentication data
-            localStorage.setItem('adminToken', result.adminToken);
-            localStorage.setItem('firstName', result.admin.first_name);
-            localStorage.setItem('lastName', result.admin.last_name);
-            localStorage.setItem('username', result.admin.username);
+            sessionStorage.setItem('adminToken', result.adminToken);
+            sessionStorage.setItem('firstName', result.admin.first_name);
+            sessionStorage.setItem('lastName', result.admin.last_name);
+            sessionStorage.setItem('username', result.admin.username);
 
             alert('Login successful! Redirecting to dashboard...');
             window.location.href = 'index.html';
@@ -85,33 +85,33 @@ async function adminLogin(event) {
         alert('Login failed. Please try again.');
     }
 }
-function logout(event){
+function logout(event) {
     event.preventDefault();
-  localStorage.clear();
+    sessionStorage.clear();
 }
 async function changePassword(event) {
-  event.preventDefault();
+    event.preventDefault();
 
-  const oldPassword = document.getElementById('oldPassword').value;
-  const newPassword = document.getElementById('newPassword').value;
-  const confirmPassword = document.getElementById('reNewPassword').value;
+    const oldPassword = document.getElementById('oldPassword').value;
+    const newPassword = document.getElementById('newPassword').value;
+    const confirmPassword = document.getElementById('reNewPassword').value;
 
-  const res = await fetch('https://api.thebirdcart.com/api/admin/change-password', {
-    method: 'POST',
-    headers: {
-      'Content-Type': 'application/json',
-      'Authorization': `Bearer ${localStorage.getItem('adminToken')}`
-    },
-    body: JSON.stringify({ oldPassword, newPassword, confirmPassword })
-  });
+    const res = await fetch('https://api.thebirdcart.com/api/admin/change-password', {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json',
+            'Authorization': `Bearer ${sessionStorage.getItem('adminToken')}`
+        },
+        body: JSON.stringify({ oldPassword, newPassword, confirmPassword })
+    });
 
-  const data = await res.json();
-  if (res.ok) {
-    alert(data.message);
-    document.getElementById('closeModal').click();
-  } else {
-    alert(data.error);
-  }
+    const data = await res.json();
+    if (res.ok) {
+        alert(data.message);
+        document.getElementById('closeModal').click();
+    } else {
+        alert(data.error);
+    }
 }
 
 
@@ -141,7 +141,7 @@ async function getDashboard(adminToken) {
 
 async function renderDashboard() {
     try {
-        const adminToken = localStorage.getItem('adminToken');
+        const adminToken = sessionStorage.getItem('adminToken');
         const data = await getDashboard(adminToken);
 
         console.log("Dashboard data:", data);
@@ -264,7 +264,7 @@ async function getOrders(adminToken) {
 
 async function renderOrders() {
     try {
-        const adminToken = localStorage.getItem('adminToken');
+        const adminToken = sessionStorage.getItem('adminToken');
         const [ordersData, analyticsData] = await Promise.all([
             getOrders(adminToken),
             getAnalytics(adminToken)
@@ -305,7 +305,7 @@ function createAllOrderRow(orderData) {
         createCustomerPhoneCell(orderData),
         createCustomerAddressCell(orderData),
         createPaymentMethodCell(orderData),
-        createActionCell(),
+        createActionCell(orderData),
         createStatusCell(orderData)
     ];
 
@@ -374,13 +374,42 @@ function createPaymentMethodCell(orderData) {
     return cell;
 }
 
-function createActionCell() {
+async function getOrder(adminToken) {
+    try {
+        const response = await fetch('https://api.thebirdcart.com/api/orders/1', {
+            headers: {
+                'Authorization': `Bearer ${adminToken}`
+            }
+        });
+
+        if (!response.ok) {
+            throw new Error('Failed to fetch orders');
+        }
+
+        return await response.json();
+    } catch (error) {
+        console.error('Orders fetch error:', error);
+        alert('Failed to load orders. Please refresh the page.');
+        throw error;
+    }
+}
+
+function createActionCell(orderData) {
     const cell = document.createElement('td');
     const button = document.createElement('button');
+    button.dataset.orderId = orderData.order_id;
+
     button.type = 'button';
     button.classList.add('btn', 'btn-info', 'btn-sm');
     button.textContent = 'Generate';
+    button.addEventListener('onclick', function () {
+        const orderId = this.dataset.orderId;
+        const newStatus = this.value;
+        const adminToken = sessionStorage.getItem('adminToken');
+        getOrder(adminToken)
+    });
     cell.appendChild(button);
+
     return cell;
 }
 
@@ -415,7 +444,7 @@ function createStatusCell(orderData) {
 
 async function onStatusChange(orderId, newStatus) {
     try {
-        const adminToken = localStorage.getItem('adminToken');
+        const adminToken = sessionStorage.getItem('adminToken');
 
         const response = await fetch(`https://api.thebirdcart.com/api/orders/${orderId}/status`, {
             method: 'PATCH',
@@ -547,7 +576,7 @@ async function getProducts(adminToken) {
 
 async function renderProducts() {
     try {
-        const adminToken = localStorage.getItem('adminToken');
+        const adminToken = sessionStorage.getItem('adminToken');
         const data = await getProducts(adminToken);
 
         console.log("Products data:", data);
@@ -691,7 +720,7 @@ function createActionsCell(product) {
 
 function createAttributeRow(product) {
     const hiddenTr = document.createElement("tr");
-     hiddenTr.className = 'd-none'
+    hiddenTr.className = 'd-none'
     const hiddenTd = document.createElement("td");
     hiddenTd.colSpan = 5;
 
@@ -762,7 +791,7 @@ function createAttributeRow(product) {
 
 async function deleteProduct(id) {
     try {
-        const adminToken = localStorage.getItem('adminToken');
+        const adminToken = sessionStorage.getItem('adminToken');
 
         const response = await fetch(`https://api.thebirdcart.com/api/products/${id}`, {
             method: 'DELETE',
@@ -788,7 +817,7 @@ async function deleteProduct(id) {
 
 async function onActiveChange(productId) {
     try {
-        const adminToken = localStorage.getItem('adminToken');
+        const adminToken = sessionStorage.getItem('adminToken');
 
         const response = await fetch(`https://api.thebirdcart.com/api/products/${productId}/flip-status`, {
             method: 'PATCH',
@@ -823,7 +852,7 @@ async function createProduct(event) {
             return;
         }
 
-        const adminToken = localStorage.getItem('adminToken');
+        const adminToken = sessionStorage.getItem('adminToken');
 
         const response = await fetch('https://api.thebirdcart.com/api/products', {
             method: 'POST',
@@ -1174,7 +1203,7 @@ function convertFileToBase64(file, index) {
 
 async function uploadImagesToServer(productId, images) {
     try {
-        const adminToken = localStorage.getItem('adminToken');
+        const adminToken = sessionStorage.getItem('adminToken');
 
         const response = await fetch(`https://api.thebirdcart.com/api/products/${productId}/images`, {
             method: 'POST',
@@ -1417,7 +1446,7 @@ async function editProduct() {
             return;
         }
 
-        const adminToken = localStorage.getItem('adminToken');
+        const adminToken = sessionStorage.getItem('adminToken');
 
         const response = await fetch(`https://api.thebirdcart.com/api/products/${productId}`, {
             method: 'PUT',
@@ -1450,7 +1479,7 @@ async function editProduct() {
 async function editImages() {
     try {
         const productId = document.getElementById('product-id').innerText;
-        const adminToken = localStorage.getItem('adminToken');
+        const adminToken = sessionStorage.getItem('adminToken');
 
         // Delete existing images first
         const deleteResponse = await fetch(`https://api.thebirdcart.com/api/products/${productId}/images`, {
