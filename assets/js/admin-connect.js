@@ -215,12 +215,12 @@ function createOrderRow(orderData) {
     paymentMethodCell.textContent = orderData.payment_method;
 
     // Action Button Cell
-    const actionCell = document.createElement('td');
-    const actionButton = document.createElement('button');
-    actionButton.type = 'button';
-    actionButton.classList.add('btn', 'btn-info', 'btn-sm');
-    actionButton.textContent = 'Generate';
-    actionCell.appendChild(actionButton);
+    // const actionCell = document.createElement('td');
+    // const actionButton = document.createElement('button');
+    // actionButton.type = 'button';
+    // actionButton.classList.add('btn', 'btn-info', 'btn-sm');
+    // actionButton.textContent = 'Generate';
+    // actionCell.appendChild(actionButton);
 
     // Order Status Cell
     const statusCell = document.createElement('td');
@@ -396,7 +396,6 @@ function renderInvoice(data) {
     container.style.border = '1px solid #ccc';
     container.style.padding = '20px';
 
-    // Helper function to add label and value
     function addTextRow(label, value) {
         const p = document.createElement('p');
         const strong = document.createElement('strong');
@@ -411,14 +410,20 @@ function renderInvoice(data) {
     title.textContent = 'Invoice';
     container.appendChild(title);
 
+    // Order Info
     addTextRow('Order Number', data.order_number);
     addTextRow('Status', data.status);
-    addTextRow('Payment Method', data.payment_method);
-    addTextRow('Payment Status', data.payment_status);
+
+    // Customer Info
+    if (data.customer) {
+        const fullName = `${data.customer.first_name} ${data.customer.last_name}`;
+        addTextRow('Customer Name', fullName);
+        addTextRow('Phone', data.customer.phone);
+    }
 
     container.appendChild(document.createElement('hr'));
 
-    // Address sections
+    // Addresses
     const makeSectionTitle = (text) => {
         const h3 = document.createElement('h3');
         h3.textContent = text;
@@ -437,8 +442,9 @@ function renderInvoice(data) {
 
     container.appendChild(document.createElement('hr'));
 
-    // Items table
+    // Items Table
     makeSectionTitle('Items');
+
     const table = document.createElement('table');
     table.style.width = '100%';
     table.style.borderCollapse = 'collapse';
@@ -446,9 +452,11 @@ function renderInvoice(data) {
 
     const thead = document.createElement('thead');
     const headerRow = document.createElement('tr');
-    ['Product', 'SKU', 'Quantity', 'Unit Price', 'Total Price'].forEach(text => {
+    ['Product', 'Quantity', 'Unit Price', 'Total'].forEach(text => {
         const th = document.createElement('th');
         th.textContent = text;
+        th.style.padding = '8px';
+        th.style.border = '1px solid #ccc';
         headerRow.appendChild(th);
     });
     thead.appendChild(headerRow);
@@ -462,43 +470,45 @@ function renderInvoice(data) {
 
         const tdName = document.createElement('td');
         tdName.textContent = item.product_name;
+        tdName.style.border = '1px solid #ccc';
+        tdName.style.padding = '8px';
         tr.appendChild(tdName);
-
-        const tdSku = document.createElement('td');
-        tdSku.textContent = item.sku;
-        tr.appendChild(tdSku);
 
         const tdQty = document.createElement('td');
         tdQty.textContent = item.quantity;
+        tdQty.style.border = '1px solid #ccc';
+        tdQty.style.padding = '8px';
         tr.appendChild(tdQty);
 
         const tdUnit = document.createElement('td');
-        tdUnit.textContent = item.unit_price;
+        tdUnit.textContent = `₹${item.unit_price}`;
+        tdUnit.style.border = '1px solid #ccc';
+        tdUnit.style.padding = '8px';
         tr.appendChild(tdUnit);
 
         const tdTotal = document.createElement('td');
-        tdTotal.textContent = item.total_price;
+        tdTotal.textContent = `₹${item.total_price}`;
+        tdTotal.style.border = '1px solid #ccc';
+        tdTotal.style.padding = '8px';
         tr.appendChild(tdTotal);
 
         itemTotal += parseFloat(item.total_price);
-
         tbody.appendChild(tr);
     });
 
     table.appendChild(tbody);
     container.appendChild(table);
-
     container.appendChild(document.createElement('hr'));
 
-    // Final calculations
+    // Totals
     const totalAmount = parseFloat(data.total_amount);
     const shippingAmount = totalAmount - itemTotal;
 
-    addTextRow('Item Subtotal', '₹' + itemTotal.toFixed(2));
-    addTextRow('Shipping Amount', '₹' + shippingAmount.toFixed(2));
-    addTextRow('Total Amount', '₹' + totalAmount.toFixed(2));
+    addTextRow('Items Subtotal', `₹${itemTotal.toFixed(2)}`);
+    addTextRow('Shipping Amount', `₹${shippingAmount.toFixed(2)}`);
+    addTextRow('Total Amount', `₹${totalAmount.toFixed(2)}`);
 
-    // Created at
+    // Created date
     const created = document.createElement('p');
     const createdAt = new Date(data.created_at);
     created.textContent = 'Created At: ' + createdAt.toLocaleString();
@@ -508,6 +518,8 @@ function renderInvoice(data) {
     const printBtn = document.createElement('button');
     printBtn.textContent = 'Print Invoice';
     printBtn.style.marginTop = '20px';
+    printBtn.style.padding = '10px 20px';
+    printBtn.style.cursor = 'pointer';
     printBtn.addEventListener('click', () => {
         const printWindow = window.open('', '_blank');
         printWindow.document.write('<html><head><title>Invoice</title></head><body>');
@@ -521,8 +533,10 @@ function renderInvoice(data) {
 
     container.appendChild(printBtn);
 
+    // Add to page
     document.body.appendChild(container);
 }
+
 
 
 function createActionCell(orderData) {
