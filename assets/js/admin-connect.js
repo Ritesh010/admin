@@ -184,10 +184,7 @@ function createOrderRow(orderData) {
 
     // Order Number Cell
     const orderNumberCell = document.createElement('td');
-    const orderNumberLink = document.createElement('a');
-    orderNumberLink.href = 'order-detail.html';
-    orderNumberLink.textContent = orderData.order_number;
-    orderNumberCell.appendChild(orderNumberLink);
+    orderNumberCell.textContent = orderData.order_number;
 
     // Order Date Cell
     const orderDateCell = document.createElement('td');
@@ -267,7 +264,8 @@ async function renderOrders() {
         const adminToken = sessionStorage.getItem('adminToken');
         const [ordersData, analyticsData] = await Promise.all([
             getOrders(adminToken),
-            getAnalytics(adminToken)
+            getAnalytics(adminToken),
+            getOrder(adminToken)
         ]);
 
         console.log("Analytics data:", analyticsData);
@@ -319,10 +317,7 @@ function createAllOrderRow(orderData) {
 
 function createOrderNumberCell(orderData) {
     const cell = document.createElement('td');
-    const link = document.createElement('a');
-    link.href = 'order-detail.html';
-    link.textContent = orderData.order_number;
-    cell.appendChild(link);
+    cell.textContent = orderData.order_number;
     return cell;
 }
 
