@@ -533,8 +533,14 @@ function renderInvoice(data) {
 
     container.appendChild(printBtn);
 
-    // Add to page
-    document.body.appendChild(container);
+    const parent = document.getElementById('invoice')
+
+    // Get the 2nd child (index 1 since it's 0-based)
+    const secondChild = parent.children[1];
+
+    if (secondChild) {
+        secondChild.replaceWith(container);
+    }
 }
 
 function createActionCell(orderData) {
