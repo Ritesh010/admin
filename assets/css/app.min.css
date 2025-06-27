@@ -25034,6 +25034,25 @@ p.no-span::after {
 
 /* change password modal */
 
+/* bill layout */
+.product-bill-layout {
+  background: #ffffff;
+  width: 60%;
+  right: 0;
+  left: 0;
+  position: relative;
+  margin: auto;
+  padding: 30px 0px 30px 0px;
+}
+
+.product-bill-close {
+  right: 7px;
+  position: absolute;
+  top: 6px;
+}
+
+/* bill layout */
+
 @media (min-width: 768px) {
   .timeline .timeline-time .time-show {
     -webkit-box-pack: center;
@@ -25130,5 +25149,20 @@ p.no-span::after {
 
   .timeline .timeline-icon {
     display: none;
+  }
+
+  .product-bill-layout {
+    background: #ffffff;
+    width: 90%;
+    right: 0;
+    left: 0;
+    position: relative;
+    margin: auto;
+    padding: 30px 0px 30px 0px;
+  }
+
+  .product-bill-layout td,
+  .product-bill-layout th {
+    font-size: 13px;
   }
 }
