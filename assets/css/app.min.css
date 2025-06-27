@@ -25049,7 +25049,10 @@ p.no-span::after {
   right: 7px;
   position: absolute;
   top: 6px;
+  cursor: pointer;
 }
+
+
 
 /* bill layout */
 
