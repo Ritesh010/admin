@@ -25040,9 +25040,13 @@ p.no-span::after {
   width: 60%;
   right: 0;
   left: 0;
-  position: relative;
+  position: fixed;
   margin: auto;
-  padding: 30px 0px 30px 0px;
+  padding: 30px 20px 30px 20px;
+  top: 87px;
+  z-index: 11111111;
+  height: 600px;
+  overflow-y: scroll;
 }
 
 .product-bill-close {
@@ -25159,9 +25163,7 @@ p.no-span::after {
     width: 90%;
     right: 0;
     left: 0;
-    position: relative;
     margin: auto;
-    padding: 30px 0px 30px 0px;
   }
 
   .product-bill-layout td,
