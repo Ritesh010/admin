@@ -399,8 +399,8 @@
                     <!-- End Container Fluid -->
 
                     <!-- bill html start -->
-                    <div class="product-bill-layout" id="invoice">
-                         <span class="product-bill-close">❌</span>
+                    <div class="product-bill-layout d-none" id="invoice">
+                         <span class="product-bill-close" onclick="this.closest('#invoice').classList.remove('d-none')">❌</span>
           
                          <div
                               style="font-family: Arial, sans-serif; max-width: 800px; margin: auto; border: 1px solid rgb(204, 204, 204); padding: 20px;">

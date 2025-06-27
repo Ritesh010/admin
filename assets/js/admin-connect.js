@@ -534,7 +534,7 @@ function renderInvoice(data) {
     container.appendChild(printBtn);
 
     const parent = document.getElementById('invoice')
-
+    parent.classList.remove('d-none');
     // Get the 2nd child (index 1 since it's 0-based)
     const secondChild = parent.children[1];
 
@@ -542,6 +542,7 @@ function renderInvoice(data) {
         secondChild.replaceWith(container);
     }
 }
+
 
 function createActionCell(orderData) {
     const cell = document.createElement('td');
